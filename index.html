@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AKP &amp; Sons Landscape Service</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Mulish:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ---- Color tokens ---- */
+    :root {
+      --green-900: #04301d; --green-800: #054a2b; --green-700: #006a38;
+      --green-600: #007848; --green-500: #009048; --green-400: #2faa57;
+      --green-300: #48a848; --green-200: #8fd49a; --green-100: #cdeed3;
+      --green-50:  #ecf8ee;
+      --ink-900: #121512; --ink-800: #181818; --ink-700: #2c302c;
+      --ink-600: #45504a; --ink-500: #687069; --ink-400: #939c95;
+      --ink-300: #c2cbc4; --ink-200: #e0e6e1; --ink-100: #eef2ef;
+      --ink-50:  #f7faf8; --white: #ffffff;
+      --soil-700: #5b4127; --soil-500: #8a6a45; --bark-100: #efe7dc;
+      --warn-500: #e0a429; --warn-50: #fdf6e6;
+      --error-500: #c1432e; --error-50: #fbeae6;
+      --brand: var(--green-500); --brand-deep: var(--green-600);
+      --brand-leaf: var(--green-300); --brand-ink: var(--ink-900);
+      --text-strong: var(--ink-900); --text-body: var(--ink-700);
+      --text-muted: var(--ink-500); --text-on-brand: var(--white);
+      --text-link: var(--green-600);
+      --surface-page: var(--ink-50); --surface-card: var(--white);
+      --surface-sunken: var(--ink-100); --surface-brand: var(--green-500);
+      --surface-brand-soft: var(--green-50); --surface-ink: var(--ink-900);
+      --border-subtle: var(--ink-200); --border-default: var(--ink-300);
+      --border-strong: var(--ink-600); --border-brand: var(--green-500);
+      --focus-ring: var(--green-400);
+    }
+    /* ---- Typography tokens ---- */
+    :root {
+      --font-display: 'Poppins', 'Trebuchet MS', system-ui, sans-serif;
+      --font-body: 'Mulish', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --fw-regular: 400; --fw-medium: 500; --fw-semibold: 600;
+      --fw-bold: 700; --fw-extrabold: 800;
+      --text-2xs: 0.6875rem; --text-xs: 0.75rem; --text-sm: 0.875rem;
+      --text-base: 1rem; --text-md: 1.125rem; --text-lg: 1.375rem;
+      --text-xl: 1.75rem; --text-2xl: 2.25rem; --text-3xl: 3rem;
+      --leading-tight: 1.08; --leading-snug: 1.25;
+      --leading-normal: 1.5; --leading-relaxed: 1.65;
+      --tracking-tight: -0.02em; --tracking-normal: 0;
+      --tracking-wide: 0.04em; --tracking-eyebrow: 0.14em;
+    }
+    /* ---- Spacing tokens ---- */
+    :root {
+      --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem;
+      --space-4: 1rem; --space-5: 1.5rem; --space-6: 2rem;
+      --space-7: 3rem; --space-8: 4rem; --space-9: 6rem;
+    }
+    /* ---- Effects tokens ---- */
+    :root {
+      --radius-xs: 6px; --radius-sm: 10px; --radius-md: 14px;
+      --radius-lg: 20px; --radius-xl: 28px; --radius-pill: 999px;
+      --shadow-xs: 0 1px 2px rgba(18,21,18,0.06);
+      --shadow-sm: 0 2px 8px rgba(18,21,18,0.07);
+      --shadow-md: 0 8px 24px rgba(18,21,18,0.09);
+      --shadow-lg: 0 18px 48px rgba(18,21,18,0.14);
+      --shadow-brand: 0 12px 28px rgba(0,120,72,0.26);
+      --shadow-focus: 0 0 0 3px rgba(47,170,87,0.45);
+      --ease-out: cubic-bezier(0.22,1,0.36,1);
+      --ease-in-out: cubic-bezier(0.65,0,0.35,1);
+      --dur-fast: 120ms; --dur-base: 220ms; --dur-slow: 420ms;
+    }
+    /* ---- Reset ---- */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: var(--font-body); background: var(--surface-card); color: var(--text-body); }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    /* ---- Layout ---- */
+    .akp-wrap { max-width: 1200px; margin-inline: auto; width: 100%; padding-inline: 32px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .split  { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 48px; align-items: center; }
+    .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 36px; }
+    .akp-nav { display: flex; align-items: center; gap: 28px; }
+    .akp-burger { display: none; border: none; background: none; cursor: pointer; padding: 6px; }
+    .hide-mobile { display: inline-flex; }
+    @media (max-width: 1000px) { .grid-3 { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 820px) {
+      .akp-nav { display: none; }
+      .akp-burger { display: inline-flex; }
+      .split { grid-template-columns: 1fr; gap: 28px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+      .hide-mobile { display: none !important; }
+    }
+    @media (max-width: 620px) {
+      .akp-wrap { padding-inline: 20px; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .grid-2 { grid-template-columns: 1fr; gap: 24px; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+
+  <script type="text/babel">
+    /* ============================================================
+       ICON
+    ============================================================ */
+    const ICON_PATHS = {
+      leaf:          'M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z M2 21c0-3 1.85-5.36 5.08-6',
+      sprout:        'M7 20h10 M10 20c5.5-2.5.8-6.4 3-10 M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8Z M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2Z',
+      tree:          'M12 13v9 M8 16l-2.5 2.5 M16 16l2.5 2.5 M12 2a6 6 0 0 0-6 6c0 1.7.7 3.2 1.8 4.3A5 5 0 0 0 12 22a5 5 0 0 0 4.2-9.7A6 6 0 0 0 18 8a6 6 0 0 0-6-6Z',
+      scissors:      'M8 6a3 3 0 1 0-6 0 3 3 0 0 0 6 0Z M8 18a3 3 0 1 0-6 0 3 3 0 0 0 6 0Z M20 4 8.12 15.88 M14.47 14.48 20 20 M8.12 8.12 12 12',
+      sun:           'M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z M12 1v2 M12 21v2 M4.2 4.2l1.4 1.4 M18.4 18.4l1.4 1.4 M1 12h2 M21 12h2 M4.2 19.8l1.4-1.4 M18.4 5.6l1.4-1.4',
+      phone:         'M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z',
+      mail:          'M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z M22 7l-10 5L2 7',
+      'map-pin':     'M20 10c0 4.4-8 12-8 12s-8-7.6-8-12a8 8 0 0 1 16 0Z M12 12a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z',
+      clock:         'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z M12 6v6l4 2',
+      calendar:      'M8 2v4 M16 2v4 M3 8h18 M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z',
+      'check-circle':'M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4 12 14.01l-3-3',
+      'shield-check':'M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z M9 12l2 2 4-4',
+      award:         'M12 15a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z M8.21 13.89 7 23l5-3 5 3-1.21-9.12',
+      quote:         'M3 21c3 0 7-1 7-8V5a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2a8 8 0 0 1-3 6Zm12 0c3 0 7-1 7-8V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2a8 8 0 0 1-3 6Z',
+      'arrow-right': 'M5 12h14 M12 5l7 7-7 7',
+      'arrow-up-right':'M7 7h10v10 M7 17 17 7',
+      menu:          'M4 6h16 M4 12h16 M4 18h16',
+      x:             'M18 6 6 18 M6 6l12 12',
+      instagram:     'M16 3H8a5 5 0 0 0-5 5v8a5 5 0 0 0 5 5h8a5 5 0 0 0 5-5V8a5 5 0 0 0-5-5Z M16 11.4A4 4 0 1 1 8.6 12 4 4 0 0 1 16 11.4Z M17.5 6.5h.01',
+      facebook:      'M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3Z',
+      truck:         'M14 18V6a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h1 M14 9h4l4 4v4a1 1 0 0 1-1 1h-1 M7.5 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z M17.5 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z',
+      camera:        'M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2Z M12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z',
+    };
+
+    function Icon({ name, size = 24, strokeWidth = 2, color = 'currentColor', style, ...rest }) {
+      const d = ICON_PATHS[name];
+      if (!d) return null;
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
+          stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round"
+          aria-hidden="true" style={{ display: 'block', flex: 'none', ...style }} {...rest}>
+          {d.split(' M').map((seg, i) => <path key={i} d={i === 0 ? seg : 'M' + seg} />)}
+        </svg>
+      );
+    }
+
+    /* ============================================================
+       BUTTON
+    ============================================================ */
+    function Button({ children, variant = 'primary', size = 'md', iconLeft = null, iconRight = null,
+      fullWidth = false, disabled = false, type = 'button', onClick, style, ...rest }) {
+      const sizeMap = {
+        sm: { padding: '8px 16px',  fontSize: 'var(--text-sm)',   gap: 8,  radius: 'var(--radius-sm)' },
+        md: { padding: '12px 22px', fontSize: 'var(--text-base)', gap: 9,  radius: 'var(--radius-md)' },
+        lg: { padding: '16px 30px', fontSize: 'var(--text-md)',   gap: 11, radius: 'var(--radius-lg)' },
+      };
+      const s = sizeMap[size] || sizeMap.md;
+      const variantMap = {
+        primary:   { background: 'var(--brand)',        color: 'var(--text-on-brand)', border: '1px solid var(--brand)',        boxShadow: 'var(--shadow-brand)' },
+        secondary: { background: 'var(--surface-card)', color: 'var(--brand-deep)',    border: '1.5px solid var(--border-brand)', boxShadow: 'var(--shadow-xs)' },
+        ghost:     { background: 'transparent',         color: 'var(--brand-deep)',    border: '1.5px solid transparent',        boxShadow: 'none' },
+        dark:      { background: 'var(--ink-900)',       color: 'var(--white)',         border: '1px solid var(--ink-900)',        boxShadow: 'var(--shadow-sm)' },
+      };
+      const v = variantMap[variant] || variantMap.primary;
+      return (
+        <button type={type} disabled={disabled} onClick={onClick}
+          style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: s.gap,
+            width: fullWidth ? '100%' : 'auto', padding: s.padding, fontFamily: 'var(--font-display)',
+            fontWeight: 'var(--fw-semibold)', fontSize: s.fontSize, lineHeight: 1, letterSpacing: '0.005em',
+            borderRadius: s.radius, cursor: disabled ? 'not-allowed' : 'pointer', opacity: disabled ? 0.5 : 1,
+            transition: 'transform var(--dur-fast) var(--ease-out), filter var(--dur-fast) var(--ease-out)',
+            ...v, ...style }}
+          onMouseDown={e => { if (!disabled) e.currentTarget.style.transform = 'translateY(1px) scale(0.985)'; }}
+          onMouseUp={e => { e.currentTarget.style.transform = ''; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.filter = ''; }}
+          onMouseEnter={e => { if (!disabled) e.currentTarget.style.filter = 'brightness(1.06)'; }}
+          {...rest}>
+          {iconLeft}{children}{iconRight}
+        </button>
+      );
+    }
+
+    /* ============================================================
+       RATING
+    ============================================================ */
+    function Rating({ value = 5, max = 5, size = 18, showValue = false, count = null, style, ...rest }) {
+      const Star = ({ fill }) => (
+        <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true" style={{ display: 'block' }}>
+          <path d="M12 2.5l2.95 5.98 6.6.96-4.77 4.65 1.13 6.57L12 17.6l-5.9 3.06 1.13-6.57L2.45 9.44l6.6-.96L12 2.5z"
+            fill={fill ? 'var(--warn-500)' : 'none'}
+            stroke={fill ? 'var(--warn-500)' : 'var(--ink-300)'}
+            strokeWidth="1.5" strokeLinejoin="round" />
+        </svg>
+      );
+      return (
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, ...style }} {...rest}>
+          <span style={{ display: 'inline-flex', gap: 2 }} role="img" aria-label={`${value} out of ${max} stars`}>
+            {Array.from({ length: max }).map((_, i) => <Star key={i} fill={i < Math.round(value)} />)}
+          </span>
+          {showValue && <span style={{ fontFamily: 'var(--font-body)', fontWeight: 'var(--fw-bold)', fontSize: 'var(--text-sm)', color: 'var(--text-strong)' }}>{value.toFixed(1)}</span>}
+          {count != null && <span style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', color: 'var(--text-muted)' }}>({count})</span>}
+        </span>
+      );
+    }
+
+    /* ============================================================
+       INPUT
+    ============================================================ */
+    function Input({ label, hint, error, icon = null, as = 'input', id, style, ...rest }) {
+      const Tag = as === 'textarea' ? 'textarea' : 'input';
+      const [focus, setFocus] = React.useState(false);
+      const inputId = id || (label ? 'fld-' + label.toLowerCase().replace(/\s+/g, '-') : undefined);
+      return (
+        <label htmlFor={inputId} style={{ display: 'flex', flexDirection: 'column', gap: 7, fontFamily: 'var(--font-body)' }}>
+          {label && <span style={{ fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-bold)', color: 'var(--text-strong)' }}>{label}</span>}
+          <span style={{ position: 'relative', display: 'flex', alignItems: as === 'textarea' ? 'flex-start' : 'center' }}>
+            {icon && (
+              <span style={{ position: 'absolute', left: 14,
+                top: as === 'textarea' ? 14 : '50%',
+                transform: as === 'textarea' ? 'none' : 'translateY(-50%)',
+                color: 'var(--ink-400)', display: 'flex' }}>{icon}</span>
+            )}
+            <Tag id={inputId} onFocus={() => setFocus(true)} onBlur={() => setFocus(false)}
+              rows={as === 'textarea' ? 4 : undefined}
+              style={{ width: '100%', boxSizing: 'border-box',
+                padding: icon ? '13px 16px 13px 42px' : '13px 16px',
+                fontFamily: 'var(--font-body)', fontSize: 'var(--text-base)', color: 'var(--text-strong)',
+                background: 'var(--surface-card)',
+                border: `1.5px solid ${error ? 'var(--error-500)' : focus ? 'var(--border-brand)' : 'var(--border-default)'}`,
+                borderRadius: 'var(--radius-md)', outline: 'none',
+                resize: as === 'textarea' ? 'vertical' : undefined,
+                boxShadow: focus ? 'var(--shadow-focus)' : 'none',
+                transition: 'border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out)',
+                ...style }} {...rest} />
+          </span>
+          {(hint || error) && <span style={{ fontSize: 'var(--text-xs)', color: error ? 'var(--error-500)' : 'var(--text-muted)' }}>{error || hint}</span>}
+        </label>
+      );
+    }
+
+    /* ============================================================
+       REVIEW CARD
+    ============================================================ */
+    function ReviewCard({ quote, name, location, rating = 5, avatarColor = 'var(--green-500)', initials, service = null, style, ...rest }) {
+      const ini = initials || (name ? name.split(' ').map(w => w[0]).slice(0, 2).join('') : '');
+      return (
+        <figure style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)',
+          background: 'var(--surface-card)', border: '1px solid var(--border-subtle)',
+          borderRadius: 'var(--radius-lg)', padding: 'var(--space-6)',
+          boxShadow: 'var(--shadow-sm)', margin: 0, ...style }} {...rest}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <Rating value={rating} size={18} />
+            <Icon name="quote" size={30} color="var(--green-100)" />
+          </div>
+          <blockquote style={{ margin: 0, fontFamily: 'var(--font-body)', fontSize: 'var(--text-md)',
+            lineHeight: 'var(--leading-relaxed)', color: 'var(--text-body)' }}>"{quote}"</blockquote>
+          <figcaption style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', marginTop: 'auto' }}>
+            <span style={{ width: 44, height: 44, borderRadius: 'var(--radius-pill)', flex: 'none',
+              background: avatarColor, color: 'var(--white)', display: 'inline-flex',
+              alignItems: 'center', justifyContent: 'center',
+              fontFamily: 'var(--font-display)', fontWeight: 'var(--fw-bold)', fontSize: 'var(--text-sm)' }}>{ini}</span>
+            <span style={{ display: 'flex', flexDirection: 'column' }}>
+              <span style={{ fontFamily: 'var(--font-display)', fontWeight: 'var(--fw-bold)', fontSize: 'var(--text-sm)', color: 'var(--text-strong)' }}>{name}</span>
+              <span style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>{[location, service].filter(Boolean).join(' · ')}</span>
+            </span>
+          </figcaption>
+        </figure>
+      );
+    }
+
+    /* ============================================================
+       SECTION HEADING
+    ============================================================ */
+    function SectionHeading({ eyebrow, title, intro = null, align = 'left', icon = 'leaf', style, ...rest }) {
+      const centered = align === 'center';
+      return (
+        <header style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)',
+          textAlign: centered ? 'center' : 'left',
+          alignItems: centered ? 'center' : 'flex-start',
+          maxWidth: centered ? 640 : 'none',
+          marginInline: centered ? 'auto' : 0, ...style }} {...rest}>
+          {eyebrow && (
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8,
+              fontFamily: 'var(--font-body)', fontWeight: 'var(--fw-extrabold)',
+              fontSize: 'var(--text-xs)', letterSpacing: 'var(--tracking-eyebrow)',
+              textTransform: 'uppercase', color: 'var(--brand-deep)' }}>
+              {icon && <Icon name={icon} size={16} color="var(--brand)" />}{eyebrow}
+            </span>
+          )}
+          <h2 style={{ margin: 0, fontFamily: 'var(--font-display)', fontWeight: 'var(--fw-extrabold)',
+            fontSize: 'var(--text-2xl)', lineHeight: 'var(--leading-tight)',
+            letterSpacing: 'var(--tracking-tight)', color: 'var(--text-strong)' }}>{title}</h2>
+          {intro && <p style={{ margin: 0, fontFamily: 'var(--font-body)', fontSize: 'var(--text-md)',
+            lineHeight: 'var(--leading-relaxed)', color: 'var(--text-muted)' }}>{intro}</p>}
+        </header>
+      );
+    }
+
+    /* ============================================================
+       DATA
+    ============================================================ */
+    const NAV    = ['Home', 'Services', 'About Us', 'Careers', 'Contact', 'Blog'];
+    const PHONE  = '(856) 555-0142';
+    const EMAIL  = 'hello@akpandsons.com';
+    const AREA_LINE = 'Serving your county & surrounding areas';
+
+    const SERVICES = [
+      { icon: 'scissors', title: 'Routine Lawn Maintenance',    description: 'From weekly mowing and edging to fertilization, our lawn care plans are tailored to your schedule and seasonal needs for exceptional results.' },
+      { icon: 'sun',      title: 'Property Clean-Up Services',  description: 'Remove unwanted debris, leaves, and overgrowth with our seasonal clean-up services — ideal for spring or fall property prep.' },
+      { icon: 'tree',     title: 'Hedge Trimming & Shaping',    description: 'Clean, well-maintained hedges increase curb appeal. We shape and trim hedges of all sizes to keep your landscaping sharp and manicured.' },
+      { icon: 'truck',    title: 'Commercial Lawn Care',        description: 'Mowing, clean-ups, mulching, hedge trimming, property maintenance and more — dependable upkeep for your commercial property.' },
+      { icon: 'sprout',   title: 'Mulching & Bed Edging',       description: 'Fresh mulch boosts curb appeal while helping with weed control and moisture retention. Bed edging creates clean, elevated borders.' },
+    ];
+
+    const WHY = [
+      { icon: 'award',        title: 'Experienced Lawn Care Team' },
+      { icon: 'shield-check', title: 'Licensed & Insured' },
+      { icon: 'calendar',     title: 'Fast Response & Reliable Scheduling' },
+      { icon: 'check-circle', title: 'Complete Clean-Up After Every Job' },
+      { icon: 'leaf',         title: 'Family-Owned & Customer-Focused' },
+      { icon: 'phone',        title: 'Great Communication & Follow-Through' },
+    ];
+
+    const REVIEWS = [
+      { rating: 5, quote: 'AKP transformed our backyard in a single weekend. The crew was on time, friendly, and left everything spotless.', name: 'Dana Whitfield', location: 'Maple Heights', service: 'Landscape clean-up', avatarColor: 'var(--green-500)' },
+      { rating: 5, quote: 'Reliable every single week. Our lawn has never looked better and the team always says hello. Real neighbors.',   name: 'Marcus Bell',    location: 'Riverside',     service: 'Lawn maintenance',   avatarColor: 'var(--green-700)' },
+      { rating: 5, quote: 'They re-did our front beds and mulched everything. Fair price, zero surprises, and it looks like a magazine cover.', name: 'Priya Nair', location: 'Oakwood',       service: 'Mulch & bed edging', avatarColor: 'var(--soil-500)' },
+    ];
+
+    const AREAS = ['Maple Heights','Riverside','Oakwood','Brookfield','Glenview','Cedar Park','Lakeshore','Westfield','Pinecrest','Hillsdale','Fairview','Greenwood'];
+
+    const HOURS = [
+      ['Mon – Fri', '8:30 am – 5:00 pm'],
+      ['Saturday',  '8:30 am – 2:00 pm'],
+      ['Sunday',    'Closed'],
+    ];
+
+    /* ============================================================
+       SHARED VISUAL CONSTANTS
+    ============================================================ */
+    const LAWN_DARK    = 'linear-gradient(180deg,rgba(6,40,24,0.82),rgba(4,32,20,0.92)),linear-gradient(150deg,#1f6b3a 0%,#0c3a20 60%,#05281a 100%)';
+    const SEED_TEXTURE = 'radial-gradient(circle at 15% 25%,rgba(255,255,255,0.12) 0 1.5px,transparent 2px),radial-gradient(circle at 75% 65%,rgba(255,255,255,0.1) 0 1.5px,transparent 2px)';
+
+    function PhotoTile({ tone = 'a', label, height = 320 }) {
+      const tones = {
+        a: 'linear-gradient(150deg,#2f8a4a 0%,#0c3a20 100%)',
+        b: 'linear-gradient(150deg,#4aa85c 0%,#155c2f 100%)',
+        c: 'linear-gradient(150deg,#6aa84f 0%,#2c6b34 100%)',
+      };
+      return (
+        <div style={{ position: 'relative', height, borderRadius: 'var(--radius-lg)', overflow: 'hidden',
+          background: tones[tone] || tones.a, boxShadow: 'var(--shadow-md)' }}>
+          <div style={{ position: 'absolute', inset: 0, opacity: 0.5, background: SEED_TEXTURE, backgroundSize: '52px 52px,80px 80px' }} />
+          <div style={{ position: 'absolute', left: 14, top: 14 }}><Icon name="camera" size={18} color="rgba(255,255,255,0.85)" /></div>
+          {label && (
+            <div style={{ position: 'absolute', left: 14, bottom: 14, display: 'inline-flex', alignItems: 'center', gap: 7,
+              padding: '6px 13px', borderRadius: 'var(--radius-pill)', background: 'rgba(8,28,16,0.55)',
+              backdropFilter: 'blur(4px)', color: '#fff', fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 13 }}>
+              <Icon name="leaf" size={13} color="var(--green-200)" />{label}
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    /* ============================================================
+       HEADER
+    ============================================================ */
+    function Header({ onNav }) {
+      const [open, setOpen] = React.useState(false);
+      const click = l => { setOpen(false); onNav(l); };
+      return (
+        <header style={{ position: 'sticky', top: 0, zIndex: 60, background: 'rgba(255,255,255,0.94)',
+          backdropFilter: 'blur(10px)', borderBottom: '1px solid var(--border-subtle)' }}>
+          <div className="akp-wrap" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', minHeight: 78, gap: 16, paddingBlock: 10 }}>
+            <a href="#top" onClick={e => { e.preventDefault(); click('Home'); }} style={{ display: 'flex', flex: 'none' }}>
+              <img src="brand_assets/AKP-removebg.png" alt="AKP &amp; Sons Landscape Service" style={{ height: 50 }} />
+            </a>
+            <nav className="akp-nav">
+              {NAV.map(l => (
+                <a key={l} href="#" onClick={e => { e.preventDefault(); click(l); }}
+                  style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 15, color: 'var(--text-strong)', whiteSpace: 'nowrap' }}>{l}</a>
+              ))}
+            </nav>
+            <div className="hide-mobile" style={{ flexDirection: 'column', alignItems: 'flex-end', gap: 4 }}>
+              <Button size="md" variant="primary" iconLeft={<Icon name="phone" size={16} />} onClick={() => click('Contact')}>{PHONE}</Button>
+              <span style={{ fontFamily: 'var(--font-body)', fontSize: 12, color: 'var(--text-muted)' }}>{AREA_LINE}</span>
+            </div>
+            <button className="akp-burger" aria-label="Menu" onClick={() => setOpen(!open)}>
+              <Icon name={open ? 'x' : 'menu'} size={26} color="var(--text-strong)" />
+            </button>
+          </div>
+          {open && (
+            <div style={{ borderTop: '1px solid var(--border-subtle)', background: 'var(--surface-card)', padding: '12px 20px 18px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                {NAV.map(l => (
+                  <a key={l} href="#" onClick={e => { e.preventDefault(); click(l); }}
+                    style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 16, color: 'var(--text-strong)', padding: '10px 4px', borderBottom: '1px solid var(--border-subtle)' }}>{l}</a>
+                ))}
+              </div>
+              <div style={{ marginTop: 14 }}>
+                <Button size="md" fullWidth iconLeft={<Icon name="phone" size={16} />} onClick={() => click('Contact')}>{PHONE}</Button>
+                <p style={{ textAlign: 'center', fontFamily: 'var(--font-body)', fontSize: 12, color: 'var(--text-muted)', marginTop: 8 }}>{AREA_LINE}</p>
+              </div>
+            </div>
+          )}
+        </header>
+      );
+    }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    function Hero({ onNav }) {
+      return (
+        <section id="top" style={{ position: 'relative', overflow: 'hidden', background: LAWN_DARK, backgroundSize: 'cover', minHeight: 480 }}>
+          <div style={{ position: 'absolute', inset: 0, opacity: 0.6, background: SEED_TEXTURE, backgroundSize: '70px 70px,110px 110px' }} />
+          <div className="akp-wrap" style={{ position: 'relative', paddingTop: 88, paddingBottom: 96 }}>
+            <div style={{ maxWidth: 620 }}>
+              <span style={{ display: 'inline-block', fontFamily: 'var(--font-body)', fontWeight: 800, fontSize: 13,
+                letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--green-200)' }}>
+                Leave your lawn care to us!
+              </span>
+              <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'clamp(34px,6vw,60px)',
+                lineHeight: 1.06, letterSpacing: '-0.02em', color: '#fff', margin: '16px 0 0', textTransform: 'uppercase' }}>
+                Relax and enjoy the hassle-free experience
+              </h1>
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(16px,2.4vw,19px)', lineHeight: 1.6,
+                color: 'rgba(255,255,255,0.84)', margin: '20px 0 0', maxWidth: 520 }}>
+                Family-owned, full-service landscaping that treats your property like our own — on time, tidy, and friendly.
+              </p>
+              <div style={{ display: 'flex', gap: 14, marginTop: 30, flexWrap: 'wrap' }}>
+                <Button size="lg" onClick={() => onNav('Contact')} iconLeft={<Icon name="phone" size={18} />}>Call Us Today!</Button>
+                <Button size="lg" variant="secondary" onClick={() => onNav('Quote')} style={{ background: 'rgba(255,255,255,0.95)' }}>Request a Quote</Button>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginTop: 30, flexWrap: 'wrap' }}>
+                <Rating value={5} size={18} />
+                <span style={{ fontFamily: 'var(--font-body)', color: 'rgba(255,255,255,0.85)', fontSize: 15 }}>
+                  <strong style={{ color: '#fff' }}>4.9</strong> from 200+ happy neighbors
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ============================================================
+       INTRO
+    ============================================================ */
+    function Intro() {
+      return (
+        <section id="about" className="akp-wrap" style={{ paddingTop: 80, paddingBottom: 80 }}>
+          <div className="split">
+            <div>
+              <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'clamp(26px,4vw,38px)',
+                lineHeight: 1.12, letterSpacing: '-0.02em', color: 'var(--brand-deep)', margin: 0 }}>
+                Lawn care services for your neighborhood &amp; surrounding areas
+              </h2>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginTop: 20,
+                fontFamily: 'var(--font-body)', fontSize: 16, lineHeight: 1.7, color: 'var(--text-body)' }}>
+                <p style={{ margin: 0 }}>We take pride in being a trusted, detail-oriented lawn care company. With years of hands-on experience, we've earned a reputation for dependable service for both homeowners and businesses.</p>
+                <p style={{ margin: 0 }}>Our team specializes in lawn mowing, edging, hedge trimming, seasonal clean-ups, mulching, and general landscape maintenance — delivering high-quality results tailored to each property. Whether you need weekly upkeep or a one-time refresh, we approach every project with care, professionalism, and a commitment to your satisfaction.</p>
+                <p style={{ margin: 0 }}>For a free quote, call AKP &amp; Sons at <a href="#contact" style={{ color: 'var(--text-link)', fontWeight: 700 }}>{PHONE}</a> today.</p>
+              </div>
+            </div>
+            <PhotoTile tone="b" label="On the job" height={340} />
+          </div>
+        </section>
+      );
+    }
+
+    /* ============================================================
+       SERVICES
+    ============================================================ */
+    function Services({ onNav }) {
+      return (
+        <section id="services" style={{ position: 'relative', background: LAWN_DARK, backgroundSize: 'cover' }}>
+          <div style={{ position: 'absolute', inset: 0, opacity: 0.5, background: SEED_TEXTURE, backgroundSize: '64px 64px,96px 96px' }} />
+          <div className="akp-wrap" style={{ position: 'relative', paddingTop: 76, paddingBottom: 84 }}>
+            <div style={{ textAlign: 'center', maxWidth: 680, marginInline: 'auto' }}>
+              <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'clamp(26px,4vw,38px)',
+                letterSpacing: '-0.02em', color: '#fff', margin: 0 }}>Professional Lawn Care Services</h2>
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: 16, lineHeight: 1.6, color: 'rgba(255,255,255,0.82)', marginTop: 12 }}>
+                We offer a wide range of lawn care solutions designed to keep your property neat, healthy, and attractive throughout the year.
+              </p>
+            </div>
+            <div className="grid-3" style={{ marginTop: 40 }}>
+              {SERVICES.map(s => (
+                <div key={s.title} style={{ background: 'rgba(255,255,255,0.95)', borderRadius: 'var(--radius-lg)', padding: 26, boxShadow: 'var(--shadow-md)' }}>
+                  <span style={{ width: 52, height: 52, borderRadius: 'var(--radius-md)', background: 'var(--green-50)',
+                    display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: 'var(--brand-deep)' }}>
+                    <Icon name={s.icon} size={27} />
+                  </span>
+                  <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 19, color: 'var(--brand-deep)',
+                    margin: '16px 0 8px', letterSpacing: '-0.01em' }}>{s.title}</h3>
+                  <p style={{ fontFamily: 'var(--font-body)', fontSize: 14.5, lineHeight: 1.6, color: 'var(--text-body)', margin: 0 }}>{s.description}</p>
+                </div>
+              ))}
+              <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', gap: 14,
+                background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: 'var(--radius-lg)', padding: 26 }}>
+                <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 19, color: '#fff', margin: 0 }}>Not sure what you need?</h3>
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: 14.5, lineHeight: 1.6, color: 'rgba(255,255,255,0.85)', margin: 0 }}>
+                  Tell us about your property and we'll recommend the right plan — free of charge.
+                </p>
+                <Button variant="dark" iconRight={<Icon name="arrow-right" size={16} />} onClick={() => onNav('Quote')}>Request a quote</Button>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ============================================================
+       TESTIMONIALS
+    ============================================================ */
+    function Testimonials() {
+      return (
+        <section id="reviews" className="akp-wrap" style={{ paddingTop: 80, paddingBottom: 80 }}>
+          <SectionHeading align="center" eyebrow="Reviews" title="Loved by the neighborhood"
+            intro="We earn our reputation one yard at a time. Here's what your neighbors are saying." />
+          <div className="grid-3" style={{ marginTop: 44 }}>
+            {REVIEWS.map(r => <ReviewCard key={r.name} {...r} />)}
+          </div>
+          <div style={{ textAlign: 'center', marginTop: 36 }}>
+            <Button variant="secondary" iconRight={<Icon name="arrow-up-right" size={16} />}>Read more reviews</Button>
+          </div>
+        </section>
+      );
+    }
+
+    /* ============================================================
+       WHY US
+    ============================================================ */
+    function WhyUs() {
+      return (
+        <section style={{ position: 'relative', background: LAWN_DARK, backgroundSize: 'cover' }}>
+          <div style={{ position: 'absolute', inset: 0, opacity: 0.5, background: SEED_TEXTURE, backgroundSize: '64px 64px,96px 96px' }} />
+          <div className="akp-wrap" style={{ position: 'relative', paddingTop: 76, paddingBottom: 84 }}>
+            <h2 style={{ textAlign: 'center', fontFamily: 'var(--font-display)', fontWeight: 800,
+              fontSize: 'clamp(26px,4vw,38px)', letterSpacing: '-0.02em', color: '#fff', margin: '0 0 44px' }}>
+              Why Work With Our Lawn Care Team?
+            </h2>
+            <div className="grid-3" style={{ gap: 36 }}>
+              {WHY.map(w => (
+                <div key={w.title} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: 14 }}>
+                  <span style={{ width: 72, height: 72, borderRadius: '50%', background: 'rgba(255,255,255,0.1)',
+                    border: '1px solid rgba(255,255,255,0.2)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <Icon name={w.icon} size={32} color="var(--green-200)" />
+                  </span>
+                  <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 15, letterSpacing: '0.02em',
+                    textTransform: 'uppercase', color: '#fff', maxWidth: 240 }}>{w.title}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ============================================================
+       SERVICE AREA
+    ============================================================ */
+    function ServiceArea({ onNav }) {
+      return (
+        <section id="areas" className="akp-wrap" style={{ paddingTop: 80, paddingBottom: 80 }}>
+          <div className="split">
+            <div>
+              <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'clamp(26px,4vw,36px)',
+                letterSpacing: '-0.02em', color: 'var(--brand-deep)', margin: 0 }}>Our Lawn Care Service Area</h2>
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: 16, lineHeight: 1.7, color: 'var(--text-body)', margin: '16px 0 24px', maxWidth: 460 }}>
+                Based locally, we proudly serve customers throughout a 20-mile radius. If you don't see your neighborhood, give us a call — we're always growing our routes.
+              </p>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px 24px' }}>
+                {AREAS.map(a => (
+                  <span key={a} style={{ display: 'inline-flex', alignItems: 'center', gap: 9,
+                    fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--text-body)' }}>
+                    <Icon name="map-pin" size={15} color="var(--brand)" />{a}
+                  </span>
+                ))}
+              </div>
+              <div style={{ marginTop: 26 }}>
+                <Button variant="primary" iconLeft={<Icon name="map-pin" size={17} />} onClick={() => onNav('Quote')}>Check my address</Button>
+              </div>
+            </div>
+            <div style={{ position: 'relative', minHeight: 320, borderRadius: 'var(--radius-lg)', overflow: 'hidden',
+              background: 'linear-gradient(150deg,#dbe7df,#c4d8c9)', border: '1px solid var(--border-subtle)',
+              boxShadow: 'var(--shadow-sm)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ position: 'absolute', inset: 0, opacity: 0.5,
+                backgroundImage: 'linear-gradient(rgba(255,255,255,0.6) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.6) 1px,transparent 1px)',
+                backgroundSize: '40px 40px' }} />
+              <div style={{ position: 'absolute', width: 200, height: 200, borderRadius: '50%',
+                border: '2px dashed var(--brand)', background: 'rgba(0,144,72,0.1)' }} />
+              <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, color: 'var(--brand-deep)' }}>
+                <Icon name="map-pin" size={36} color="var(--brand)" />
+                <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 14 }}>20-mile service radius</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ============================================================
+       QUOTE CTA
+    ============================================================ */
+    function QuoteCTA() {
+      const [sent, setSent] = React.useState(false);
+      return (
+        <section id="quote" style={{ background: 'var(--surface-brand-soft)', paddingTop: 72, paddingBottom: 88 }}>
+          <div className="akp-wrap">
+            <div className="split" style={{ background: 'var(--surface-card)', borderRadius: 'var(--radius-xl)',
+              padding: 'clamp(24px,4vw,44px)', boxShadow: 'var(--shadow-md)', border: '1px solid var(--border-subtle)' }}>
+              <div>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: 'var(--brand-deep)',
+                  fontFamily: 'var(--font-body)', fontWeight: 800, fontSize: 12, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+                  <Icon name="leaf" size={14} color="var(--brand)" />Request a quote
+                </span>
+                <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'clamp(24px,3.5vw,34px)',
+                  lineHeight: 1.12, letterSpacing: '-0.02em', color: 'var(--text-strong)', margin: '14px 0 0' }}>
+                  Let's make your yard the best on the block.
+                </h2>
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: 16, lineHeight: 1.6, color: 'var(--text-muted)', margin: '14px 0 0' }}>
+                  Tell us a little about your property and we'll get back to you within one business day — no pressure, no obligation.
+                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 24 }}>
+                  {[['phone', PHONE], ['mail', EMAIL], ['clock', 'Mon–Sat · 8:30 to 5']].map(([ic, t]) => (
+                    <span key={t} style={{ display: 'inline-flex', alignItems: 'center', gap: 12, fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--text-body)' }}>
+                      <span style={{ width: 38, height: 38, borderRadius: 'var(--radius-md)', background: 'var(--green-50)',
+                        display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flex: 'none' }}>
+                        <Icon name={ic} size={18} color="var(--brand-deep)" /></span>{t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div>
+                {sent ? (
+                  <div style={{ height: '100%', minHeight: 300, display: 'flex', flexDirection: 'column',
+                    alignItems: 'center', justifyContent: 'center', textAlign: 'center', gap: 12 }}>
+                    <span style={{ width: 64, height: 64, borderRadius: '50%', background: 'var(--green-50)',
+                      display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <Icon name="check-circle" size={34} color="var(--brand)" /></span>
+                    <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 22, color: 'var(--text-strong)', margin: 0 }}>Request received!</h3>
+                    <p style={{ fontFamily: 'var(--font-body)', color: 'var(--text-muted)', margin: 0, maxWidth: 280 }}>
+                      Thanks — a member of the AKP &amp; Sons family will reach out within one business day.
+                    </p>
+                    <Button variant="secondary" onClick={() => setSent(false)}>Send another</Button>
+                  </div>
+                ) : (
+                  <form onSubmit={e => { e.preventDefault(); setSent(true); }} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                    <div className="grid-2" style={{ gap: 14 }}>
+                      <Input label="Full name" placeholder="Jane Rivera" required />
+                      <Input label="Phone" placeholder="(000) 000-0000" type="tel" required />
+                    </div>
+                    <Input label="Property address" icon={<Icon name="map-pin" size={18} />} placeholder="123 Oak Street" />
+                    <Input label="What do you need?" as="textarea" placeholder="Lawn size, timeline, anything special…" />
+                    <Button type="submit" size="lg" fullWidth iconRight={<Icon name="arrow-right" size={18} />}>Request my free quote</Button>
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, justifyContent: 'center',
+                      fontFamily: 'var(--font-body)', fontSize: 13, color: 'var(--text-muted)' }}>
+                      <Icon name="shield-check" size={15} color="var(--brand)" />No spam. We only use this to reach you.
+                    </span>
+                  </form>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    function PayBadge({ children }) {
+      return (
+        <span style={{ display: 'inline-flex', alignItems: 'center', height: 26, padding: '0 9px', borderRadius: 5,
+          background: '#fff', color: '#1a3a24', fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 10,
+          letterSpacing: '0.04em' }}>{children}</span>
+      );
+    }
+
+    function Footer({ onNav }) {
+      return (
+        <footer id="contact" style={{ background: 'var(--green-600)', color: 'rgba(255,255,255,0.85)', paddingTop: 56, paddingBottom: 30 }}>
+          <div className="akp-wrap">
+            <nav style={{ display: 'flex', flexWrap: 'wrap', gap: 22, justifyContent: 'center',
+              paddingBottom: 30, borderBottom: '1px solid rgba(255,255,255,0.18)' }}>
+              {NAV.map(l => (
+                <a key={l} href="#" onClick={e => { e.preventDefault(); onNav(l); }}
+                  style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 15, color: '#fff' }}>{l}</a>
+              ))}
+            </nav>
+            <div className="footer-grid" style={{ paddingTop: 34 }}>
+              <div>
+                <img src="brand_assets/AKP-removebg.png" alt="AKP &amp; Sons"
+                  style={{ height: 54, marginBottom: 14, filter: 'brightness(0) invert(1)' }} />
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: 14, lineHeight: 1.6, maxWidth: 280, margin: 0 }}>
+                  Family-owned landscaping serving your neighborhood. Licensed &amp; insured, and proud of every yard we touch.
+                </p>
+                <div style={{ display: 'flex', gap: 10, marginTop: 16 }}>
+                  {['instagram', 'facebook'].map(s => (
+                    <a key={s} href="#" aria-label={s} style={{ width: 40, height: 40, borderRadius: 'var(--radius-md)',
+                      background: 'rgba(255,255,255,0.14)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <Icon name={s} size={18} color="#fff" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, color: '#fff', fontSize: 13,
+                  letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 14 }}>Contact Information</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10, fontFamily: 'var(--font-body)', fontSize: 14 }}>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 9 }}>
+                    <Icon name="phone" size={16} color="var(--green-200)" /><strong style={{ color: '#fff' }}>{PHONE}</strong></span>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 9 }}>
+                    <Icon name="mail" size={16} color="var(--green-200)" />{EMAIL}</span>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 9 }}>
+                    <Icon name="map-pin" size={16} color="var(--green-200)" />Your town, USA</span>
+                </div>
+              </div>
+              <div>
+                <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, color: '#fff', fontSize: 13,
+                  letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 14 }}>Business Hours</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontFamily: 'var(--font-body)', fontSize: 14 }}>
+                  {HOURS.map(([d, h]) => (
+                    <span key={d} style={{ display: 'flex', justifyContent: 'space-between', gap: 14, maxWidth: 230 }}>
+                      <span>{d}</span><strong style={{ color: '#fff' }}>{h}</strong>
+                    </span>
+                  ))}
+                </div>
+                <div style={{ display: 'flex', gap: 7, marginTop: 16, flexWrap: 'wrap' }}>
+                  <PayBadge>VISA</PayBadge><PayBadge>MASTERCARD</PayBadge><PayBadge>AMEX</PayBadge><PayBadge>DISCOVER</PayBadge>
+                </div>
+              </div>
+            </div>
+            <div style={{ marginTop: 36, paddingTop: 20, borderTop: '1px solid rgba(255,255,255,0.18)',
+              display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 10, fontFamily: 'var(--font-body)', fontSize: 13 }}>
+              <span>© 2026 AKP &amp; Sons Landscape Service LLC. All rights reserved.</span>
+              <span>Privacy · Terms</span>
+            </div>
+          </div>
+        </footer>
+      );
+    }
+
+    /* ============================================================
+       APP
+    ============================================================ */
+    function AKPSite() {
+      const scrollTo = id => {
+        const el = document.getElementById(id);
+        if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+      };
+      const onNav = label => {
+        const map = { Home: 'top', Services: 'services', 'About Us': 'about', Careers: 'about',
+          Contact: 'contact', Blog: 'reviews', Reviews: 'reviews', Areas: 'areas', Quote: 'quote' };
+        scrollTo(map[label] || 'top');
+      };
+      return (
+        <div>
+          <Header onNav={onNav} />
+          <Hero onNav={onNav} />
+          <Intro />
+          <Services onNav={onNav} />
+          <Testimonials />
+          <WhyUs />
+          <ServiceArea onNav={onNav} />
+          <QuoteCTA />
+          <Footer onNav={onNav} />
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<AKPSite />);
+  </script>
+</body>
+</html>
