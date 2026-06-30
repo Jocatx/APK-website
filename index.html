@@ -96,6 +96,14 @@
       .grid-2 { grid-template-columns: 1fr; gap: 24px; }
       .footer-grid { grid-template-columns: 1fr; }
     }
+    .grid-why { display: grid; grid-template-columns: repeat(3,1fr); gap: 36px; }
+    @media (max-width: 1000px) { .grid-why { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 480px) { .grid-why { gap: 24px; } }
+    .zip-form { flex-wrap: wrap; }
+    @media (max-width: 480px) {
+      .zip-form { flex-direction: column; align-items: stretch; }
+      .zip-form button { width: 100% !important; }
+    }
   </style>
 </head>
 <body>
@@ -302,7 +310,7 @@
     /* ============================================================
        DATA
     ============================================================ */
-    const NAV    = ['Home', 'Services', 'About Us', 'Careers', 'Contact', 'Blog'];
+    const NAV    = ['Home', 'Services', 'About Us', 'Contact'];
     const PHONE  = '(631) 346-5892';
     const EMAIL  = 'hello@akpandsonslandscaping.com';
     const AREA_LINE = 'Serving Ridge & surrounding Long Island areas';
@@ -331,6 +339,13 @@
     ];
 
     const AREAS = ['Ridge','Middle Island','Yaphank','Coram','Medford','Shirley','Mastic','Manorville','Riverhead','Patchogue','Centereach','Ronkonkoma'];
+
+    const ZIP_TO_AREA = {
+      '11961': 'Ridge', '11953': 'Middle Island', '11980': 'Yaphank', '11727': 'Coram',
+      '11763': 'Medford', '11967': 'Shirley', '11950': 'Mastic', '11951': 'Mastic',
+      '11949': 'Manorville', '11901': 'Riverhead', '11772': 'Patchogue',
+      '11720': 'Centereach', '11779': 'Ronkonkoma',
+    };
 
     const HOURS = [
       ['Mon – Fri', '8:30 am – 5:00 pm'],
@@ -416,31 +431,29 @@
     ============================================================ */
     function Hero({ onNav }) {
       return (
-        <section id="top" style={{ position: 'relative', overflow: 'hidden', background: LAWN_DARK, backgroundSize: 'cover', minHeight: 480 }}>
-          <div style={{ position: 'absolute', inset: 0, opacity: 0.6, background: SEED_TEXTURE, backgroundSize: '70px 70px,110px 110px' }} />
-          <div className="akp-wrap" style={{ position: 'relative', paddingTop: 88, paddingBottom: 96 }}>
-            <div style={{ maxWidth: 620 }}>
+        <section id="top" style={{ position: 'relative', overflow: 'hidden', minHeight: 560,
+          background: 'url(brand_assets/background-optimized.jpg) center/cover no-repeat' }}>
+          <div style={{ position: 'absolute', inset: 0,
+            background: 'linear-gradient(100deg,rgba(4,28,18,0.92) 0%,rgba(4,28,18,0.78) 32%,rgba(4,28,18,0.35) 58%,rgba(4,28,18,0.12) 78%)' }} />
+          <div style={{ position: 'absolute', inset: 0, mixBlendMode: 'multiply', opacity: 0.5,
+            background: 'linear-gradient(150deg,#0c3a20,#05281a)' }} />
+          <div className="akp-wrap" style={{ position: 'relative', paddingTop: 'clamp(56px,14vw,100px)', paddingBottom: 'clamp(64px,15vw,110px)' }}>
+            <div style={{ maxWidth: 600 }}>
               <span style={{ display: 'inline-block', fontFamily: 'var(--font-body)', fontWeight: 800, fontSize: 13,
                 letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--green-200)' }}>
                 Leave your lawn care to us!
               </span>
-              <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'clamp(34px,6vw,60px)',
+              <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'clamp(34px,6vw,58px)',
                 lineHeight: 1.06, letterSpacing: '-0.02em', color: '#fff', margin: '16px 0 0', textTransform: 'uppercase' }}>
-                Relax and enjoy the hassle-free experience
+                Enjoy a beautiful yard without lifting a finger
               </h1>
               <p style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(16px,2.4vw,19px)', lineHeight: 1.6,
-                color: 'rgba(255,255,255,0.84)', margin: '20px 0 0', maxWidth: 520 }}>
+                color: 'rgba(255,255,255,0.84)', margin: '20px 0 0', maxWidth: 480 }}>
                 Family-owned, full-service landscaping that treats your property like our own — on time, tidy, and friendly.
               </p>
               <div style={{ display: 'flex', gap: 14, marginTop: 30, flexWrap: 'wrap' }}>
                 <Button size="lg" onClick={() => onNav('Contact')} iconLeft={<Icon name="phone" size={18} />}>Call Us Today!</Button>
                 <Button size="lg" variant="secondary" onClick={() => onNav('Quote')} style={{ background: 'rgba(255,255,255,0.95)' }}>Request a Quote</Button>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginTop: 30, flexWrap: 'wrap' }}>
-                <Rating value={5} size={18} />
-                <span style={{ fontFamily: 'var(--font-body)', color: 'rgba(255,255,255,0.85)', fontSize: 15 }}>
-                  <strong style={{ color: '#fff' }}>4.9</strong> from 200+ happy neighbors
-                </span>
               </div>
             </div>
           </div>
@@ -453,7 +466,7 @@
     ============================================================ */
     function Intro() {
       return (
-        <section id="about" className="akp-wrap" style={{ paddingTop: 80, paddingBottom: 80 }}>
+        <section id="about" className="akp-wrap" style={{ paddingTop: 'clamp(48px,11vw,80px)', paddingBottom: 'clamp(48px,11vw,80px)' }}>
           <div className="split">
             <div>
               <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'clamp(26px,4vw,38px)',
@@ -480,7 +493,7 @@
       return (
         <section id="services" style={{ position: 'relative', background: LAWN_DARK, backgroundSize: 'cover' }}>
           <div style={{ position: 'absolute', inset: 0, opacity: 0.5, background: SEED_TEXTURE, backgroundSize: '64px 64px,96px 96px' }} />
-          <div className="akp-wrap" style={{ position: 'relative', paddingTop: 76, paddingBottom: 84 }}>
+          <div className="akp-wrap" style={{ position: 'relative', paddingTop: 'clamp(48px,11vw,76px)', paddingBottom: 'clamp(52px,12vw,84px)' }}>
             <div style={{ textAlign: 'center', maxWidth: 680, marginInline: 'auto' }}>
               <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'clamp(26px,4vw,38px)',
                 letterSpacing: '-0.02em', color: '#fff', margin: 0 }}>Professional Lawn Care Services</h2>
@@ -519,7 +532,7 @@
     ============================================================ */
     function Testimonials() {
       return (
-        <section id="reviews" className="akp-wrap" style={{ paddingTop: 80, paddingBottom: 80 }}>
+        <section id="reviews" className="akp-wrap" style={{ paddingTop: 'clamp(48px,11vw,80px)', paddingBottom: 'clamp(48px,11vw,80px)' }}>
           <SectionHeading align="center" eyebrow="Reviews" title="Loved by the neighborhood"
             intro="We earn our reputation one yard at a time. Here's what your neighbors are saying." />
           <div className="grid-3" style={{ marginTop: 44 }}>
@@ -539,12 +552,12 @@
       return (
         <section style={{ position: 'relative', background: LAWN_DARK, backgroundSize: 'cover' }}>
           <div style={{ position: 'absolute', inset: 0, opacity: 0.5, background: SEED_TEXTURE, backgroundSize: '64px 64px,96px 96px' }} />
-          <div className="akp-wrap" style={{ position: 'relative', paddingTop: 76, paddingBottom: 84 }}>
+          <div className="akp-wrap" style={{ position: 'relative', paddingTop: 'clamp(48px,11vw,76px)', paddingBottom: 'clamp(52px,12vw,84px)' }}>
             <h2 style={{ textAlign: 'center', fontFamily: 'var(--font-display)', fontWeight: 800,
               fontSize: 'clamp(26px,4vw,38px)', letterSpacing: '-0.02em', color: '#fff', margin: '0 0 44px' }}>
               Why Work With Our Lawn Care Team?
             </h2>
-            <div className="grid-3" style={{ gap: 36 }}>
+            <div className="grid-why">
               {WHY.map(w => (
                 <div key={w.title} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: 14 }}>
                   <span style={{ width: 72, height: 72, borderRadius: '50%', background: 'rgba(255,255,255,0.1)',
@@ -565,8 +578,19 @@
        SERVICE AREA
     ============================================================ */
     function ServiceArea({ onNav }) {
+      const [zip, setZip] = React.useState('');
+      const [result, setResult] = React.useState(null); // { status: 'in'|'out'|'invalid', town? }
+
+      function handleCheck(e) {
+        e.preventDefault();
+        const cleaned = zip.trim();
+        if (!/^\d{5}$/.test(cleaned)) { setResult({ status: 'invalid' }); return; }
+        const town = ZIP_TO_AREA[cleaned];
+        setResult(town ? { status: 'in', town } : { status: 'out' });
+      }
+
       return (
-        <section id="areas" className="akp-wrap" style={{ paddingTop: 80, paddingBottom: 80 }}>
+        <section id="areas" className="akp-wrap" style={{ paddingTop: 'clamp(48px,11vw,80px)', paddingBottom: 'clamp(48px,11vw,80px)' }}>
           <div className="split">
             <div>
               <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'clamp(26px,4vw,36px)',
@@ -575,16 +599,51 @@
                 Based locally, we proudly serve customers throughout a 20-mile radius. If you don't see your neighborhood, give us a call — we're always growing our routes.
               </p>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px 24px' }}>
-                {AREAS.map(a => (
-                  <span key={a} style={{ display: 'inline-flex', alignItems: 'center', gap: 9,
-                    fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--text-body)' }}>
-                    <Icon name="map-pin" size={15} color="var(--brand)" />{a}
+                {AREAS.map(a => {
+                  const matched = result?.status === 'in' && result.town === a;
+                  return (
+                    <span key={a} style={{ display: 'inline-flex', alignItems: 'center', gap: 9,
+                      fontFamily: 'var(--font-body)', fontSize: 15, fontWeight: matched ? 'var(--fw-bold)' : 'normal',
+                      color: matched ? 'var(--brand-deep)' : 'var(--text-body)' }}>
+                      <Icon name={matched ? 'check-circle' : 'map-pin'} size={15} color="var(--brand)" />{a}
+                    </span>
+                  );
+                })}
+              </div>
+
+              <form onSubmit={handleCheck} className="zip-form" style={{ display: 'flex', alignItems: 'flex-start', gap: 10, marginTop: 26, maxWidth: 420 }}>
+                <div style={{ flex: '1 1 200px', minWidth: 0 }}>
+                  <Input aria-label="ZIP code" placeholder="Enter your ZIP code" inputMode="numeric" maxLength={5}
+                    value={zip} onChange={e => setZip(e.target.value.replace(/\D/g, '').slice(0, 5))}
+                    icon={<Icon name="map-pin" size={18} />} />
+                </div>
+                <Button type="submit" variant="primary">Check coverage</Button>
+              </form>
+
+              {result?.status === 'in' && (
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 16, padding: '12px 16px',
+                  background: 'var(--green-50)', border: '1px solid var(--border-brand)', borderRadius: 'var(--radius-md)', maxWidth: 420 }}>
+                  <Icon name="check-circle" size={20} color="var(--brand-deep)" />
+                  <span style={{ fontFamily: 'var(--font-body)', fontSize: 14, color: 'var(--text-strong)', flex: 1 }}>
+                    Good news — we service <strong>{result.town}, NY</strong>!
                   </span>
-                ))}
-              </div>
-              <div style={{ marginTop: 26 }}>
-                <Button variant="primary" iconLeft={<Icon name="map-pin" size={17} />} onClick={() => onNav('Quote')}>Check my address</Button>
-              </div>
+                  <Button size="sm" variant="secondary" onClick={() => onNav('Quote')}>Get a quote</Button>
+                </div>
+              )}
+              {result?.status === 'out' && (
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 16, padding: '12px 16px',
+                  background: 'var(--error-50)', border: '1px solid var(--error-500)', borderRadius: 'var(--radius-md)', maxWidth: 420 }}>
+                  <Icon name="x" size={20} color="var(--error-500)" />
+                  <span style={{ fontFamily: 'var(--font-body)', fontSize: 14, color: 'var(--text-strong)' }}>
+                    We don't have a route there yet — call us at <strong>{PHONE}</strong> and we'll see what we can do.
+                  </span>
+                </div>
+              )}
+              {result?.status === 'invalid' && (
+                <span style={{ display: 'block', marginTop: 10, fontFamily: 'var(--font-body)', fontSize: 13, color: 'var(--error-500)' }}>
+                  Enter a valid 5-digit ZIP code.
+                </span>
+              )}
             </div>
             <div style={{ position: 'relative', minHeight: 320, borderRadius: 'var(--radius-lg)', overflow: 'hidden',
               background: 'linear-gradient(150deg,#dbe7df,#c4d8c9)', border: '1px solid var(--border-subtle)',
@@ -627,7 +686,7 @@
       }
 
       return (
-        <section id="quote" style={{ background: 'var(--surface-brand-soft)', paddingTop: 72, paddingBottom: 88 }}>
+        <section id="quote" style={{ background: 'var(--surface-brand-soft)', paddingTop: 'clamp(44px,10vw,72px)', paddingBottom: 'clamp(52px,12vw,88px)' }}>
           <div className="akp-wrap">
             <div className="split" style={{ background: 'var(--surface-card)', borderRadius: 'var(--radius-xl)',
               padding: 'clamp(24px,4vw,44px)', boxShadow: 'var(--shadow-md)', border: '1px solid var(--border-subtle)' }}>
@@ -778,8 +837,8 @@
         if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
       };
       const onNav = label => {
-        const map = { Home: 'top', Services: 'services', 'About Us': 'about', Careers: 'about',
-          Contact: 'contact', Blog: 'reviews', Reviews: 'reviews', Areas: 'areas', Quote: 'quote' };
+        const map = { Home: 'top', Services: 'services', 'About Us': 'about',
+          Contact: 'contact', Reviews: 'reviews', Areas: 'areas', Quote: 'quote' };
         scrollTo(map[label] || 'top');
       };
       return (
@@ -788,7 +847,6 @@
           <Hero onNav={onNav} />
           <Intro />
           <Services onNav={onNav} />
-          <Testimonials />
           <WhyUs />
           <ServiceArea onNav={onNav} />
           <QuoteCTA />
