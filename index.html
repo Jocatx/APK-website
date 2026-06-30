@@ -104,6 +104,7 @@
   <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
   <script type="text/babel">
     /* ============================================================
@@ -302,9 +303,9 @@
        DATA
     ============================================================ */
     const NAV    = ['Home', 'Services', 'About Us', 'Careers', 'Contact', 'Blog'];
-    const PHONE  = '(856) 555-0142';
-    const EMAIL  = 'hello@akpandsons.com';
-    const AREA_LINE = 'Serving your county & surrounding areas';
+    const PHONE  = '(631) 346-5892';
+    const EMAIL  = 'hello@akpandsonslandscaping.com';
+    const AREA_LINE = 'Serving Ridge & surrounding Long Island areas';
 
     const SERVICES = [
       { icon: 'scissors', title: 'Routine Lawn Maintenance',    description: 'From weekly mowing and edging to fertilization, our lawn care plans are tailored to your schedule and seasonal needs for exceptional results.' },
@@ -324,12 +325,12 @@
     ];
 
     const REVIEWS = [
-      { rating: 5, quote: 'AKP transformed our backyard in a single weekend. The crew was on time, friendly, and left everything spotless.', name: 'Dana Whitfield', location: 'Maple Heights', service: 'Landscape clean-up', avatarColor: 'var(--green-500)' },
-      { rating: 5, quote: 'Reliable every single week. Our lawn has never looked better and the team always says hello. Real neighbors.',   name: 'Marcus Bell',    location: 'Riverside',     service: 'Lawn maintenance',   avatarColor: 'var(--green-700)' },
-      { rating: 5, quote: 'They re-did our front beds and mulched everything. Fair price, zero surprises, and it looks like a magazine cover.', name: 'Priya Nair', location: 'Oakwood',       service: 'Mulch & bed edging', avatarColor: 'var(--soil-500)' },
+      { rating: 5, quote: 'AKP transformed our backyard in a single weekend. The crew was on time, friendly, and left everything spotless.', name: 'Dana Whitfield', location: 'Middle Island', service: 'Landscape clean-up', avatarColor: 'var(--green-500)' },
+      { rating: 5, quote: 'Reliable every single week. Our lawn has never looked better and the team always says hello. Real neighbors.',   name: 'Marcus Bell',    location: 'Yaphank',     service: 'Lawn maintenance',   avatarColor: 'var(--green-700)' },
+      { rating: 5, quote: 'They re-did our front beds and mulched everything. Fair price, zero surprises, and it looks like a magazine cover.', name: 'Priya Nair', location: 'Coram',       service: 'Mulch & bed edging', avatarColor: 'var(--soil-500)' },
     ];
 
-    const AREAS = ['Maple Heights','Riverside','Oakwood','Brookfield','Glenview','Cedar Park','Lakeshore','Westfield','Pinecrest','Hillsdale','Fairview','Greenwood'];
+    const AREAS = ['Ridge','Middle Island','Yaphank','Coram','Medford','Shirley','Mastic','Manorville','Riverhead','Patchogue','Centereach','Ronkonkoma'];
 
     const HOURS = [
       ['Mon – Fri', '8:30 am – 5:00 pm'],
@@ -606,8 +607,25 @@
     /* ============================================================
        QUOTE CTA
     ============================================================ */
+    const EMAILJS_SERVICE_ID  = 'service_3cbd7nw';
+    const EMAILJS_TEMPLATE_ID = 'template_w6247va';
+    const EMAILJS_PUBLIC_KEY  = 'pmHh_hH0999_thboW';
+
     function QuoteCTA() {
       const [sent, setSent] = React.useState(false);
+      const [sending, setSending] = React.useState(false);
+      const [error, setError] = React.useState(null);
+      const formRef = React.useRef(null);
+
+      function handleSubmit(e) {
+        e.preventDefault();
+        setSending(true);
+        setError(null);
+        emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, formRef.current, EMAILJS_PUBLIC_KEY)
+          .then(() => { setSending(false); setSent(true); })
+          .catch(() => { setSending(false); setError('Something went wrong. Please call us instead.'); });
+      }
+
       return (
         <section id="quote" style={{ background: 'var(--surface-brand-soft)', paddingTop: 72, paddingBottom: 88 }}>
           <div className="akp-wrap">
@@ -649,14 +667,20 @@
                     <Button variant="secondary" onClick={() => setSent(false)}>Send another</Button>
                   </div>
                 ) : (
-                  <form onSubmit={e => { e.preventDefault(); setSent(true); }} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                  <form ref={formRef} onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                     <div className="grid-2" style={{ gap: 14 }}>
-                      <Input label="Full name" placeholder="Jane Rivera" required />
-                      <Input label="Phone" placeholder="(000) 000-0000" type="tel" required />
+                      <Input label="Full name" name="from_name" placeholder="Jane Rivera" required />
+                      <Input label="Phone" name="phone" placeholder="(000) 000-0000" type="tel" required />
                     </div>
-                    <Input label="Property address" icon={<Icon name="map-pin" size={18} />} placeholder="123 Oak Street" />
-                    <Input label="What do you need?" as="textarea" placeholder="Lawn size, timeline, anything special…" />
-                    <Button type="submit" size="lg" fullWidth iconRight={<Icon name="arrow-right" size={18} />}>Request my free quote</Button>
+                    <Input label="Email" name="reply_to" type="email" placeholder="jane@example.com" required />
+                    <Input label="Property address" name="address" icon={<Icon name="map-pin" size={18} />} placeholder="123 Oak Street" />
+                    <Input label="What do you need?" name="message" as="textarea" placeholder="Lawn size, timeline, anything special…" />
+                    {error && (
+                      <span style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: 'var(--error-500)' }}>{error}</span>
+                    )}
+                    <Button type="submit" size="lg" fullWidth disabled={sending} iconRight={<Icon name="arrow-right" size={18} />}>
+                      {sending ? 'Sending…' : 'Request my free quote'}
+                    </Button>
                     <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, justifyContent: 'center',
                       fontFamily: 'var(--font-body)', fontSize: 13, color: 'var(--text-muted)' }}>
                       <Icon name="shield-check" size={15} color="var(--brand)" />No spam. We only use this to reach you.
@@ -717,7 +741,7 @@
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: 9 }}>
                     <Icon name="mail" size={16} color="var(--green-200)" />{EMAIL}</span>
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: 9 }}>
-                    <Icon name="map-pin" size={16} color="var(--green-200)" />Your town, USA</span>
+                    <Icon name="map-pin" size={16} color="var(--green-200)" />Ridge, NY</span>
                 </div>
               </div>
               <div>
