@@ -669,6 +669,9 @@
     const EMAILJS_SERVICE_ID  = 'service_3cbd7nw';
     const EMAILJS_TEMPLATE_ID = 'template_w6247va';
     const EMAILJS_PUBLIC_KEY  = 'pmHh_hH0999_thboW';
+    // Customer confirmation, sent from the business Gmail account
+    const EMAILJS_CONFIRM_SERVICE_ID  = 'service_lmr7u7u';
+    const EMAILJS_CONFIRM_TEMPLATE_ID = 'template_ke56f5f';
 
     function QuoteCTA() {
       const [sent, setSent] = React.useState(false);
@@ -680,8 +683,15 @@
         e.preventDefault();
         setSending(true);
         setError(null);
-        emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, formRef.current, EMAILJS_PUBLIC_KEY)
-          .then(() => { setSending(false); setSent(true); })
+        const params = Object.fromEntries(new FormData(formRef.current));
+        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params, EMAILJS_PUBLIC_KEY)
+          .then(() => {
+            // Only confirm to the customer once the business has the request
+            emailjs.send(EMAILJS_CONFIRM_SERVICE_ID, EMAILJS_CONFIRM_TEMPLATE_ID, params, EMAILJS_PUBLIC_KEY)
+              .catch(() => {});
+            setSending(false);
+            setSent(true);
+          })
           .catch(() => { setSending(false); setError('Something went wrong. Please call us instead.'); });
       }
 
