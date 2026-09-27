@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Free Landscaping Estimate | AKP &amp; Sons Landscape Service</title>
+  <meta name="description" content="Free, no-obligation landscaping estimates in Ridge & surrounding Long Island areas. Lawn care, clean-ups, hedge trimming, mulching and commercial service.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Mulish:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ---- Tokens (same as the main site) ---- */
+    :root {
+      --green-900: #04301d; --green-800: #054a2b; --green-700: #006a38;
+      --green-600: #007848; --green-500: #009048; --green-400: #2faa57;
+      --green-200: #8fd49a; --green-100: #cdeed3; --green-50: #ecf8ee;
+      --ink-900: #121512; --ink-700: #2c302c; --ink-500: #687069;
+      --ink-400: #939c95; --ink-300: #c2cbc4; --ink-200: #e0e6e1; --ink-50: #f7faf8;
+      --error-500: #c1432e; --error-50: #fbeae6;
+      --font-display: 'Poppins', 'Trebuchet MS', system-ui, sans-serif;
+      --font-body: 'Mulish', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+      --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px;
+      --radius-sm: 10px; --radius-md: 14px; --radius-lg: 20px; --radius-xl: 28px; --radius-pill: 999px;
+      /* base → elevated → floating */
+      --shadow-elevated: 0 1px 2px rgba(4,48,29,0.06), 0 6px 18px rgba(4,48,29,0.07);
+      --shadow-floating: 0 2px 4px rgba(4,48,29,0.06), 0 14px 32px rgba(4,48,29,0.12), 0 32px 64px rgba(4,48,29,0.14);
+      --shadow-brand: 0 2px 4px rgba(0,120,72,0.18), 0 10px 24px rgba(0,120,72,0.24);
+      --shadow-focus: 0 0 0 3px rgba(47,170,87,0.45);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+      --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ---- Base ---- */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: var(--font-body); font-size: 16px; line-height: 1.7; color: var(--ink-700); background: #fff; -webkit-font-smoothing: antialiased; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3 { font-family: var(--font-display); color: var(--ink-900); margin: 0; letter-spacing: -0.03em; line-height: 1.1; text-wrap: balance; }
+    .wrap { max-width: 1160px; margin-inline: auto; padding-inline: var(--space-4); }
+    @media (min-width: 640px) { .wrap { padding-inline: var(--space-6); } }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+    /* ---- Buttons ---- */
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 26px;
+      font-family: var(--font-display); font-weight: 700; font-size: 16px; line-height: 1; border-radius: var(--radius-md);
+      border: 1.5px solid transparent; cursor: pointer; white-space: nowrap;
+      transition: transform 260ms var(--ease-spring), opacity 160ms var(--ease-out); }
+    .btn svg { flex: none; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(1px) scale(0.98); transition-duration: 80ms; }
+    .btn:focus-visible { outline: none; box-shadow: var(--shadow-focus); }
+    .btn-primary { background: var(--green-500); color: #fff; box-shadow: var(--shadow-brand); }
+    .btn-primary:focus-visible { box-shadow: var(--shadow-brand), var(--shadow-focus); }
+    .btn-light { background: rgba(255,255,255,0.12); color: #fff; border-color: rgba(255,255,255,0.35); }
+    .btn-outline { background: #fff; color: var(--green-600); border-color: var(--green-500); }
+    .btn[disabled] { opacity: 0.6; cursor: wait; transform: none; }
+
+    /* ---- Header ---- */
+    .top { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--ink-200); }
+    .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); min-height: 68px; }
+    .top img { height: 42px; width: auto; }
+    .top .btn { min-height: 44px; padding: 0 16px; font-size: 15px; }
+    @media (min-width: 640px) { .top img { height: 50px; } .top .wrap { min-height: 78px; } }
+    .logo-link { border-radius: var(--radius-sm); transition: opacity 160ms var(--ease-out); }
+    .logo-link:hover { opacity: 0.85; }
+    .logo-link:active { opacity: 0.7; }
+    .logo-link:focus-visible { outline: none; box-shadow: var(--shadow-focus); }
+
+    /* ---- Hero ---- */
+    .hero { position: relative; overflow: hidden; background: var(--green-900) url(/brand_assets/background-optimized.jpg) center/cover no-repeat; }
+    .hero::before { content: ''; position: absolute; inset: 0; mix-blend-mode: multiply; background: linear-gradient(150deg, #0c3a20, #05281a); opacity: 0.55; }
+    .hero::after { content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 0% 0%, rgba(4,28,18,0.85), transparent 70%),
+        radial-gradient(ellipse 70% 70% at 100% 100%, rgba(4,28,18,0.7), transparent 70%),
+        linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.25)); }
+    .grain { position: absolute; inset: 0; z-index: 1; background-image: var(--grain); opacity: 0.08; mix-blend-mode: overlay; pointer-events: none; }
+    .hero-grid { position: relative; z-index: 2; display: grid; gap: var(--space-6); padding-block: var(--space-6) var(--space-7); }
+    @media (min-width: 920px) {
+      .hero-grid { grid-template-columns: 1.05fr 0.95fr; align-items: center; gap: var(--space-7); padding-block: var(--space-8) var(--space-9); }
+    }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green-200); }
+    .hero h1 { color: #fff; font-weight: 800; font-size: clamp(34px, 8.5vw, 60px); line-height: 1.04; margin-top: var(--space-3); }
+    .hero h1 em { font-style: normal; color: var(--green-200); }
+    .hero-lede { color: rgba(255,255,255,0.86); font-size: clamp(16px, 2.2vw, 19px); line-height: 1.6; margin: var(--space-4) 0 0; max-width: 520px; }
+    .checks { list-style: none; padding: 0; margin: var(--space-5) 0 0; display: grid; gap: var(--space-2); }
+    .checks li { display: flex; align-items: center; gap: 10px; color: #fff; font-weight: 700; font-size: 15px; }
+    .checks svg { color: var(--green-200); flex: none; }
+    .hero-call { margin-top: var(--space-5); display: none; }
+    @media (min-width: 920px) { .hero-call { display: flex; gap: var(--space-3); align-items: center; } }
+    .hero-call span { color: rgba(255,255,255,0.75); font-size: 14px; }
+
+    /* ---- Form card (floating layer) ---- */
+    .card { background: #fff; border-radius: var(--radius-xl); padding: var(--space-5); box-shadow: var(--shadow-floating); scroll-margin-top: 90px; }
+    @media (min-width: 640px) { .card { padding: var(--space-6); } }
+    .card h2 { font-size: clamp(22px, 3vw, 26px); font-weight: 800; }
+    .card-sub { margin: 6px 0 var(--space-5); font-size: 15px; line-height: 1.5; color: var(--ink-500); }
+    .fields { display: grid; gap: var(--space-4); }
+    @media (min-width: 520px) { .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); } }
+    .row-2 { display: grid; gap: var(--space-4); }
+    .field label, .field legend { display: block; font-size: 14px; font-weight: 700; color: var(--ink-900); margin-bottom: 6px; padding: 0; }
+    .field .opt { font-weight: 500; color: var(--ink-400); }
+    .field input, .field textarea { width: 100%; font: inherit; font-size: 16px; line-height: 1.4; color: var(--ink-900);
+      background: #fff; border: 1.5px solid var(--ink-300); border-radius: var(--radius-md); padding: 13px 15px; outline: none;
+      transition: border-color 160ms var(--ease-out), box-shadow 160ms var(--ease-out); }
+    .field input:hover, .field textarea:hover { border-color: var(--ink-400); }
+    .field input:focus, .field textarea:focus { border-color: var(--green-500); box-shadow: var(--shadow-focus); }
+    .field textarea { resize: vertical; min-height: 88px; }
+    fieldset.field { border: 0; margin: 0; padding: 0; min-width: 0; }
+    .chips { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+    .chip input { position: absolute; opacity: 0; pointer-events: none; }
+    .chip span { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 14px; border-radius: var(--radius-pill);
+      border: 1.5px solid var(--ink-300); font-size: 14px; font-weight: 700; color: var(--ink-700); cursor: pointer; user-select: none;
+      transition: transform 240ms var(--ease-spring), background-color 160ms var(--ease-out), border-color 160ms var(--ease-out), color 160ms var(--ease-out); }
+    .chip span:hover { border-color: var(--green-400); }
+    .chip span:active { transform: scale(0.96); }
+    .chip input:focus-visible + span { box-shadow: var(--shadow-focus); }
+    .chip input:checked + span { background: var(--green-50); border-color: var(--green-500); color: var(--green-700); }
+    .chip span svg { display: none; }
+    .chip input:checked + span svg { display: block; }
+    .form-error { display: none; padding: 12px 14px; border-radius: var(--radius-md); background: var(--error-50); color: var(--error-500); font-size: 14px; font-weight: 600; line-height: 1.5; }
+    .form-error.show { display: block; }
+    .form-error a { text-decoration: underline; }
+    .card .btn-primary { width: 100%; min-height: 58px; font-size: 17px; }
+    .fine { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; color: var(--ink-500); margin: 0; text-align: center; }
+    .fine svg { color: var(--green-500); flex: none; }
+
+    /* ---- Sections ---- */
+    .section { padding-block: var(--space-8); }
+    @media (min-width: 920px) { .section { padding-block: var(--space-9); } }
+    .section-head { max-width: 640px; margin: 0 auto var(--space-6); text-align: center; }
+    .section-head .eyebrow { color: var(--green-600); }
+    .section-head h2 { font-size: clamp(27px, 4.5vw, 40px); font-weight: 800; margin-top: var(--space-3); }
+    .section-head p { margin: var(--space-3) 0 0; color: var(--ink-500); }
+
+    /* Services (elevated cards on sunken base) */
+    .services { background: var(--ink-50); }
+    .svc-grid { display: grid; gap: var(--space-4); }
+    @media (min-width: 640px) { .svc-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 980px) { .svc-grid { grid-template-columns: repeat(3, 1fr); } }
+    .svc { background: #fff; border: 1px solid var(--ink-200); border-radius: var(--radius-lg); padding: var(--space-5); box-shadow: var(--shadow-elevated); }
+    .svc .ico { width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--green-50); color: var(--green-600); display: inline-flex; align-items: center; justify-content: center; }
+    .svc h3 { font-size: 18px; font-weight: 700; margin-top: var(--space-4); letter-spacing: -0.01em; color: var(--green-700); }
+    .svc p { margin: var(--space-2) 0 0; font-size: 15px; line-height: 1.6; }
+    .svc-cta { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: var(--space-3);
+      background: var(--green-600); border-color: var(--green-600); color: rgba(255,255,255,0.88); position: relative; overflow: hidden; }
+    .svc-cta h3 { color: #fff; margin-top: 0; }
+    .svc-cta p { margin: 0; }
+    .svc-cta .btn { background: #fff; color: var(--green-700); min-height: 46px; }
+
+    /* Steps */
+    .steps { display: grid; gap: var(--space-5); counter-reset: step; }
+    @media (min-width: 820px) { .steps { grid-template-columns: repeat(3, 1fr); gap: var(--space-6); } }
+    .step { position: relative; padding-left: 64px; }
+    @media (min-width: 820px) { .step { padding-left: 0; padding-top: 68px; text-align: center; } }
+    .step::before { counter-increment: step; content: counter(step); position: absolute; left: 0; top: 0; width: 48px; height: 48px;
+      border-radius: 50%; background: var(--green-500); color: #fff; font-family: var(--font-display); font-weight: 800; font-size: 20px;
+      display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-brand); }
+    @media (min-width: 820px) { .step::before { left: 50%; transform: translateX(-50%); } }
+    .step h3 { font-size: 19px; font-weight: 700; }
+    .step p { margin: 6px 0 0; font-size: 15px; line-height: 1.6; color: var(--ink-500); }
+
+    /* Why + areas (dark band) */
+    .band { position: relative; overflow: hidden; color: rgba(255,255,255,0.86);
+      background:
+        radial-gradient(ellipse 60% 80% at 10% 0%, rgba(47,170,87,0.28), transparent 60%),
+        radial-gradient(ellipse 50% 70% at 95% 100%, rgba(0,144,72,0.3), transparent 60%),
+        linear-gradient(160deg, #0c3a20 0%, #05281a 100%); }
+    .band .wrap { position: relative; z-index: 2; }
+    .band h2 { color: #fff; }
+    .band .eyebrow { color: var(--green-200); }
+    .band-grid { display: grid; gap: var(--space-7); }
+    @media (min-width: 920px) { .band-grid { grid-template-columns: 1fr 1fr; gap: var(--space-8); } }
+    .band h2 { font-size: clamp(26px, 4vw, 36px); font-weight: 800; margin-top: var(--space-3); }
+    .why { list-style: none; margin: var(--space-5) 0 0; padding: 0; display: grid; gap: var(--space-3); }
+    .why li { display: flex; gap: var(--space-3); align-items: flex-start; padding: var(--space-4); border-radius: var(--radius-md);
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); }
+    .why .ico { width: 40px; height: 40px; border-radius: 50%; background: rgba(143,212,154,0.14); color: var(--green-200); display: inline-flex; align-items: center; justify-content: center; flex: none; }
+    .why strong { display: block; color: #fff; font-family: var(--font-display); font-weight: 700; font-size: 16px; line-height: 1.3; }
+    .why span { font-size: 14px; line-height: 1.55; }
+    .areas-list { list-style: none; margin: var(--space-5) 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px var(--space-5); }
+    .areas-list li { display: flex; align-items: center; gap: 8px; color: #fff; font-weight: 600; font-size: 15px; }
+    .areas-list svg { color: var(--green-200); flex: none; }
+    .areas-note { margin: var(--space-4) 0 0; font-size: 14px; }
+    .areas-note a { color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+
+    /* Final CTA */
+    .final { text-align: center; }
+    .final h2 { font-size: clamp(27px, 4.5vw, 40px); font-weight: 800; max-width: 620px; margin-inline: auto; }
+    .final p { margin: var(--space-3) auto 0; max-width: 520px; color: var(--ink-500); }
+    .final-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-3); margin-top: var(--space-5); }
+
+    /* Footer */
+    .foot { background: var(--green-600); color: rgba(255,255,255,0.85); padding-block: var(--space-6); font-size: 14px; }
+    .foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-4); }
+    .foot img { height: 44px; width: auto; filter: brightness(0) invert(1); }
+    .foot-links { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); }
+    .foot a { color: #fff; font-weight: 700; border-radius: 4px; transition: opacity 160ms var(--ease-out); }
+    .foot a:hover { opacity: 0.8; }
+    .foot a:active { opacity: 0.65; }
+    .foot a:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+    .foot small { display: block; width: 100%; padding-top: var(--space-4); border-top: 1px solid rgba(255,255,255,0.18); font-size: 13px; }
+
+    /* Mobile action bar (floating layer) */
+    .mbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; display: grid; grid-template-columns: 1fr 1.3fr; gap: var(--space-2);
+      padding: 10px var(--space-4) calc(10px + env(safe-area-inset-bottom)); background: rgba(255,255,255,0.97); backdrop-filter: blur(10px);
+      border-top: 1px solid var(--ink-200); box-shadow: 0 -8px 24px rgba(4,48,29,0.1);
+      transition: transform 360ms var(--ease-out), opacity 240ms var(--ease-out); }
+    .mbar .btn { min-height: 50px; padding: 0 12px; font-size: 15px; }
+    .mbar.hidden { transform: translateY(110%); opacity: 0; pointer-events: none; }
+    body { padding-bottom: 76px; }
+    @media (min-width: 920px) { .mbar { display: none; } body { padding-bottom: 0; } }
+
+    /* Entrance */
+    @media (prefers-reduced-motion: no-preference) {
+      .rise { opacity: 0; transform: translateY(16px); animation: rise 700ms var(--ease-out) forwards; }
+      .rise-2 { animation-delay: 120ms; }
+      @keyframes rise { to { opacity: 1; transform: none; } }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn, .chip span { transition: none; } }
+  </style>
+
+  <!-- Meta Pixel: paste the Pixel ID from Meta Events Manager between the quotes.
+       Also paste it in free-quote/thank-you/index.html. Nothing loads while it's empty. -->
+  <script>
+    var META_PIXEL_ID = '';
+    if (META_PIXEL_ID) {
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', META_PIXEL_ID);
+      fbq('track', 'PageView');
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Icon sprite -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></symbol>
+      <symbol id="i-tick" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.4-8 12-8 12s-8-7.6-8-12a8 8 0 0 1 16 0Z"/><path d="M12 12a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z"/><path d="M9 12l2 2 4-4"/></symbol>
+      <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></symbol>
+      <symbol id="i-scissors" viewBox="0 0 24 24"><path d="M8 6a3 3 0 1 0-6 0 3 3 0 0 0 6 0Z"/><path d="M8 18a3 3 0 1 0-6 0 3 3 0 0 0 6 0Z"/><path d="M20 4 8.12 15.88"/><path d="M14.47 14.48 20 20"/><path d="M8.12 8.12 12 12"/></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></symbol>
+      <symbol id="i-tree" viewBox="0 0 24 24"><path d="M12 13v9"/><path d="M12 2a6 6 0 0 0-6 6c0 1.7.7 3.2 1.8 4.3A5 5 0 0 0 12 22a5 5 0 0 0 4.2-9.7A6 6 0 0 0 18 8a6 6 0 0 0-6-6Z"/></symbol>
+      <symbol id="i-sprout" viewBox="0 0 24 24"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8Z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2Z"/></symbol>
+      <symbol id="i-truck" viewBox="0 0 24 24"><path d="M14 18V6a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h1"/><path d="M14 9h4l4 4v4a1 1 0 0 1-1 1h-1"/><path d="M7.5 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M17.5 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></symbol>
+      <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 8h18"/><path d="M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/></symbol>
+      <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></symbol>
+    </defs>
+  </svg>
+
+  <header class="top">
+    <div class="wrap">
+      <a class="logo-link" href="/" aria-label="AKP &amp; Sons Landscape Service home">
+        <img src="/brand_assets/AKP-removebg.png" alt="AKP &amp; Sons Landscape Service" width="120" height="50">
+      </a>
+      <a class="btn btn-primary" href="tel:+16313465892">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-phone"/></svg>
+        (631) 346-5892
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO + FORM -->
+    <section class="hero">
+      <div class="grain"></div>
+      <div class="wrap hero-grid">
+        <div class="rise">
+          <span class="eyebrow">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-leaf"/></svg>
+            AKP &amp; Sons Landscape Service
+          </span>
+          <h1>Get a <em>free</em> landscaping estimate</h1>
+          <p class="hero-lede">Lawn care, clean-ups, hedges, mulching and more — for homes and businesses in Ridge &amp; surrounding Long Island areas.</p>
+          <ul class="checks">
+            <li><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-check"/></svg>Free, no-obligation quote</li>
+            <li><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-check"/></svg>We reply within one business day</li>
+            <li><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-check"/></svg>Family-owned, licensed &amp; insured</li>
+          </ul>
+          <div class="hero-call">
+            <a class="btn btn-light" href="tel:+16313465892">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-phone"/></svg>
+              Rather talk? Call us
+            </a>
+            <span>Mon–Fri 8:30–5 · Sat 8:30–2</span>
+          </div>
+        </div>
+
+        <div class="card rise rise-2" id="quote">
+          <h2>Request your free estimate</h2>
+          <p class="card-sub">Takes about a minute. We'll call or email you back.</p>
+          <form id="quote-form" class="fields" novalidate>
+            <div class="row-2">
+              <div class="field">
+                <label for="f-name">Name</label>
+                <input id="f-name" name="from_name" autocomplete="name" placeholder="Jane Rivera" required>
+              </div>
+              <div class="field">
+                <label for="f-phone">Phone</label>
+                <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(000) 000-0000" required>
+              </div>
+            </div>
+            <div class="field">
+              <label for="f-email">Email</label>
+              <input id="f-email" name="reply_to" type="email" autocomplete="email" inputmode="email" placeholder="jane@example.com" required>
+            </div>
+            <div class="field">
+              <label for="f-address">Property address or town</label>
+              <input id="f-address" name="address" autocomplete="street-address" placeholder="123 Oak St, Ridge" required>
+            </div>
+            <fieldset class="field">
+              <legend>What do you need? <span class="opt">(pick any)</span></legend>
+              <div class="chips">
+                <label class="chip"><input type="checkbox" name="services" value="Lawn maintenance"><span><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#i-tick"/></svg>Lawn maintenance</span></label>
+                <label class="chip"><input type="checkbox" name="services" value="Clean-up"><span><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#i-tick"/></svg>Clean-up</span></label>
+                <label class="chip"><input type="checkbox" name="services" value="Hedge trimming"><span><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#i-tick"/></svg>Hedge trimming</span></label>
+                <label class="chip"><input type="checkbox" name="services" value="Mulch & edging"><span><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#i-tick"/></svg>Mulch &amp; edging</span></label>
+                <label class="chip"><input type="checkbox" name="services" value="Commercial"><span><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#i-tick"/></svg>Commercial</span></label>
+                <label class="chip"><input type="checkbox" name="services" value="Not sure"><span><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#i-tick"/></svg>Not sure</span></label>
+              </div>
+            </fieldset>
+            <div class="field">
+              <label for="f-msg">Anything else? <span class="opt">(optional)</span></label>
+              <textarea id="f-msg" name="message" rows="3" placeholder="Lawn size, timeline, gate code…"></textarea>
+            </div>
+            <div class="form-error" id="form-error" role="alert"></div>
+            <button class="btn btn-primary" type="submit" id="submit-btn">
+              <span>Get my free estimate</span>
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg>
+            </button>
+            <p class="fine">
+              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-shield"/></svg>
+              No spam. We only use this to reach you.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="section services">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-leaf"/></svg>
+            What we do
+          </span>
+          <h2>Full-service landscaping, one call</h2>
+          <p>Weekly upkeep or a one-time refresh — we'll quote whatever your property needs.</p>
+        </div>
+        <div class="svc-grid">
+          <article class="svc">
+            <span class="ico"><svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-scissors"/></svg></span>
+            <h3>Lawn Maintenance</h3>
+            <p>Weekly mowing, edging and fertilization on a schedule that fits your property and the season.</p>
+          </article>
+          <article class="svc">
+            <span class="ico"><svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-sun"/></svg></span>
+            <h3>Spring &amp; Fall Clean-Ups</h3>
+            <p>Leaves, debris and overgrowth cleared out so your yard is ready for the season ahead.</p>
+          </article>
+          <article class="svc">
+            <span class="ico"><svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-tree"/></svg></span>
+            <h3>Hedge Trimming &amp; Shaping</h3>
+            <p>Clean, sharp hedges of every size — the quickest way to boost curb appeal.</p>
+          </article>
+          <article class="svc">
+            <span class="ico"><svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-sprout"/></svg></span>
+            <h3>Mulching &amp; Bed Edging</h3>
+            <p>Fresh mulch and crisp borders that look great and help with weeds and moisture.</p>
+          </article>
+          <article class="svc">
+            <span class="ico"><svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-truck"/></svg></span>
+            <h3>Commercial Properties</h3>
+            <p>Dependable mowing, clean-ups and grounds upkeep for businesses and multi-unit properties.</p>
+          </article>
+          <article class="svc svc-cta">
+            <h3>Not sure what you need?</h3>
+            <p>Tell us about your property and we'll recommend the right plan — free.</p>
+            <a class="btn" href="#quote">
+              Get my estimate
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-leaf"/></svg>
+            How it works
+          </span>
+          <h2>Three easy steps</h2>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <h3>Send your request</h3>
+            <p>Fill out the short form or give us a call.</p>
+          </div>
+          <div class="step">
+            <h3>Get your free quote</h3>
+            <p>We'll reach out within one business day with a clear price — no pressure.</p>
+          </div>
+          <div class="step">
+            <h3>Enjoy your yard</h3>
+            <p>We get to work, and we clean up after every job.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY US + SERVICE AREA -->
+    <section class="section band">
+      <div class="grain"></div>
+      <div class="wrap band-grid">
+        <div>
+          <span class="eyebrow">Why AKP &amp; Sons</span>
+          <h2>A local crew that shows up</h2>
+          <ul class="why">
+            <li><span class="ico"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-home"/></svg></span>
+              <div><strong>Family-owned &amp; local</strong><span>We treat your property like our own.</span></div></li>
+            <li><span class="ico"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-shield"/></svg></span>
+              <div><strong>Licensed &amp; insured</strong><span>Peace of mind on every job.</span></div></li>
+            <li><span class="ico"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-calendar"/></svg></span>
+              <div><strong>Fast, reliable scheduling</strong><span>Quick replies and crews that arrive when we say.</span></div></li>
+            <li><span class="ico"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-check"/></svg></span>
+              <div><strong>Complete clean-up</strong><span>We leave every property tidier than we found it.</span></div></li>
+          </ul>
+        </div>
+        <div>
+          <span class="eyebrow">Service area</span>
+          <h2>Serving Ridge &amp; surrounding Long Island areas</h2>
+          <ul class="areas-list">
+            <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-pin"/></svg>Ridge</li>
+            <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-pin"/></svg>Middle Island</li>
+            <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-pin"/></svg>Yaphank</li>
+            <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-pin"/></svg>Coram</li>
+            <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-pin"/></svg>Medford</li>
+            <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-pin"/></svg>Shirley</li>
+            <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-pin"/></svg>Mastic</li>
+            <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-pin"/></svg>Manorville</li>
+            <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-pin"/></svg>Riverhead</li>
+            <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-pin"/></svg>Patchogue</li>
+            <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-pin"/></svg>Centereach</li>
+            <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-pin"/></svg>Ronkonkoma</li>
+          </ul>
+          <p class="areas-note">Don't see your town? <a href="tel:+16313465892">Give us a call</a> — we're always adding routes.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="section final">
+      <div class="wrap">
+        <h2>Ready for a yard you're proud of?</h2>
+        <p>Get your free, no-obligation estimate today.</p>
+        <div class="final-actions">
+          <a class="btn btn-primary" href="#quote">
+            Get my free estimate
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg>
+          </a>
+          <a class="btn btn-outline" href="tel:+16313465892">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-phone"/></svg>
+            (631) 346-5892
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <img src="/brand_assets/AKP-removebg.png" alt="AKP &amp; Sons" width="106" height="44">
+      <div class="foot-links">
+        <a href="tel:+16313465892">(631) 346-5892</a>
+        <a href="mailto:hello@akpandsonslandscaping.com">hello@akpandsonslandscaping.com</a>
+        <a href="/">Visit our website</a>
+      </div>
+      <small>© 2026 AKP &amp; Sons Landscape Service LLC · Ridge, NY</small>
+    </div>
+  </footer>
+
+  <!-- Mobile call / quote bar -->
+  <div class="mbar" id="mbar">
+    <a class="btn btn-outline" href="tel:+16313465892">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-phone"/></svg>
+      Call
+    </a>
+    <a class="btn btn-primary" href="#quote">Free Estimate</a>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    // Same EmailJS setup as the main site (see CLAUDE.md)
+    var EMAILJS_SERVICE_ID  = 'service_3cbd7nw';
+    var EMAILJS_TEMPLATE_ID = 'template_w6247va';
+    var EMAILJS_PUBLIC_KEY  = 'pmHh_hH0999_thboW';
+    // Customer confirmation, sent from the business Gmail account
+    var EMAILJS_CONFIRM_SERVICE_ID  = 'service_lmr7u7u';
+    var EMAILJS_CONFIRM_TEMPLATE_ID = 'template_ke56f5f';
+
+    // Where did this visitor come from? Tag links like /free-quote?src=doorhanger
+    // (or standard utm_source / utm_campaign from Meta ads).
+    function leadSource() {
+      var q = new URLSearchParams(location.search);
+      var src = q.get('src') || q.get('utm_source');
+      var parts = [];
+      if (src) parts.push(src);
+      else if (/facebook|instagram|fb\.|meta/i.test(document.referrer)) parts.push('facebook/instagram (untagged link)');
+      else parts.push('direct / unknown');
+      if (q.get('utm_campaign')) parts.push('campaign: ' + q.get('utm_campaign'));
+      if (q.get('utm_content')) parts.push('ad: ' + q.get('utm_content'));
+      return parts.join(' · ');
+    }
+
+    var form = document.getElementById('quote-form');
+    var errBox = document.getElementById('form-error');
+    var btn = document.getElementById('submit-btn');
+
+    function showError(html) { errBox.innerHTML = html; errBox.classList.add('show'); }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      errBox.classList.remove('show');
+
+      var firstBad = Array.prototype.find.call(form.querySelectorAll('[required]'), function (el) { return !el.checkValidity(); });
+      if (firstBad) {
+        showError('Please fill in your ' + firstBad.labels[0].textContent.toLowerCase() + '.');
+        firstBad.focus();
+        return;
+      }
+
+      var fd = new FormData(form);
+      var services = fd.getAll('services').join(', ') || 'Not specified';
+      var note = (fd.get('message') || '').trim();
+      var source = leadSource();
+
+      var base = {
+        from_name: fd.get('from_name').trim(),
+        phone: fd.get('phone').trim(),
+        reply_to: fd.get('reply_to').trim(),
+        address: fd.get('address').trim(),
+        services: services,
+        lead_source: source
+      };
+      // Services and lead source go into the message so they show up with the current templates.
+      var notify = Object.assign({}, base, {
+        message: 'Services: ' + services + (note ? '\n\n' + note : '') + '\n\n— From the free-quote landing page. Source: ' + source
+      });
+      var confirm = Object.assign({}, base, {
+        message: 'Services: ' + services + (note ? '\n\n' + note : '')
+      });
+
+      btn.disabled = true;
+      btn.querySelector('span').textContent = 'Sending…';
+
+      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, notify, EMAILJS_PUBLIC_KEY)
+        .then(function () {
+          // Only confirm to the customer once the business has the request
+          return emailjs.send(EMAILJS_CONFIRM_SERVICE_ID, EMAILJS_CONFIRM_TEMPLATE_ID, confirm, EMAILJS_PUBLIC_KEY)
+            .catch(function () {});
+        })
+        .then(function () {
+          location.href = '/free-quote/thank-you/';
+        })
+        .catch(function () {
+          btn.disabled = false;
+          btn.querySelector('span').textContent = 'Get my free estimate';
+          showError('Something went wrong sending your request. Please call us at <a href="tel:+16313465892">(631) 346-5892</a>.');
+        });
+    });
+
+    // Hide the mobile bar while the form is on screen
+    var mbar = document.getElementById('mbar');
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        mbar.classList.toggle('hidden', entries[0].isIntersecting);
+      }, { threshold: 0.25 }).observe(document.getElementById('quote'));
+    }
+  </script>
+</body>
+</html>

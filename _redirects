@@ -1,0 +1,5 @@
+# Short addresses printed on QR codes. NEVER delete or rename the left side —
+# printed material depends on it. Change the right side to send scans somewhere new.
+# 302 (temporary) so browsers don't cache the destination.
+
+/dh    /free-quote/?src=doorhanger    302
