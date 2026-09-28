@@ -64,7 +64,7 @@
 ## Business Info
 
 - All emails shown on the site: hello@akpandsonslandscaping.com
-- Phone: (631) 346-5892
+- Phone: (631) 213-9899
 - Service areas: Ridge, Middle Island, Yaphank, Coram, Medford, Shirley, Mastic, Manorville, Riverhead, Patchogue, Centereach, Ronkonkoma — all real Long Island towns within ~20 miles of Ridge, NY. Area-line tagline: "Serving Ridge & surrounding Long Island areas"
 
 ## Quote Form / EmailJS
