@@ -2,4 +2,6 @@
 # printed material depends on it. Change the right side to send scans somewhere new.
 # 302 (temporary) so browsers don't cache the destination.
 
-/dh    /free-quote/?src=doorhanger    302
+/dh      /free-quote/?src=doorhanger    302
+/sign    /free-quote/?src=aframe-sign   302
+/yard    /free-quote/?src=yard-sign     302
